@@ -7,4 +7,5 @@ headers = {'host': 'api.linnworks.net', 'connection': 'keep-alive', 'accept': 'a
 payload = {'applicationId': '6c6edc81-5372-4309-bc72-aea610367d62', 'applicationSecret': 'b9c21192-f035-4d77-b967-4936cbcf5fc1'}
 
 r = requests.post('https://api.linnworks.net//api/Auth/AuthorizeByApplication', headers=headers, params=payload)
+
 print r.text
