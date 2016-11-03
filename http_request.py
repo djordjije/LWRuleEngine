@@ -32,8 +32,14 @@ stock_item = {
         "StockItemId": "81a58e95-35ec-4402-99bd-8cae59e8c9d9"
     }
 
+#This uses the /Inventory/UpdateInventoryItemPrices to update prices for each SubSource
 update_price = requests.post('https://ext.linnworks.net//api/Inventory/UpdateInventoryItemPrices',
               headers={'Authorization': token},
               params={'inventoryItemPrices': "[{'Source': 'EBAY','Price': 15.50,'SubSource': 'EBAY0_US','StockItemId': '81a58e95-35ec-4402-99bd-8cae59e8c9d9'}]"})
 
+update_retail_price = requests.post('https://ext.linnworks.net//api/Inventory/UpdateInventoryItem',
+              headers={'Authorization': token},
+              params={'inventoryItem': "{'RetailPrice': 15.50,'StockItemId': '81a58e95-35ec-4402-99bd-8cae59e8c9d9', 'ItemTitle': 'TEST ITEM DO NO BID / BUY', 'ItemNumber': 'TEST'}"})
+
 print update_price.text
+print update_retail_price.text
