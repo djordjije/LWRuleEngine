@@ -1,4 +1,4 @@
-from TestFolder.Classes import TestA
+from Resources.Classes import Product
 from business_rules.variables import *
 from business_rules.actions import *
 from business_rules import run_all
@@ -47,7 +47,7 @@ rules_old = [
 
 rules = make_rules()
 
-p = TestA()
+p = Product()
 print p.current_inventory
 print p.days_last_sold
 print type(p.days_last_sold)
