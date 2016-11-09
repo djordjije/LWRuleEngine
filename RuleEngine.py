@@ -1,6 +1,6 @@
 from Resources.Classes import *
 from business_rules import run_all
-from rule_maker import make_rules, read_csv
+from rule_maker import make_rules
 
 rules_old = [
     {"conditions": {
