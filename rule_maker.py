@@ -1,65 +1,69 @@
 import csv
 
+
 def read_csv():
     rules = []
     f = open('rules.csv')
-    csvFile = csv.reader(f)
-    for row in csvFile:
+    csv_file = csv.reader(f)
+    for row in csv_file:
         count = 0
         while count < len(row):
             rules.append(row[count].strip())
             count += 1
     rules = filter(None, rules)
     for item in rules:
-        if item.lower() == 'parameter':
+        if item.lower() == 'parameter' or str(item).startswith('#'):
             rules.remove(item)
     return rules
 
-#list = read_csv()
-#list = ['rule',"CONDITION", "days_last_sold", "greater_than", 4,"CONDITION", "created", "less_than", 5, 'action', 'increase_price', 'sales_percentage', 0.1, 'rule',"CONDITION", "days_last_sold", "greater_than", 4,"CONDITION", "created", "less_than", 5, 'action', 'increase_price', 'sales_percentage', 0.1]
-#rules = []
+# list = read_csv()
+# list = ['rule',"CONDITION", "days_last_sold", "greater_than", 4,"CONDITION", "created", "less_than", 5, 'action',
+# 'increase_price', 'sales_percentage', 0.1, 'rule',"CONDITION", "days_last_sold", "greater_than", 4,"CONDITION",
+# "created", "less_than", 5, 'action', 'increase_price', 'sales_percentage', 0.1]
+# rules = []
 
-def make_conditions(list):
+
+def make_conditions(cond_list):
     conditions = []
-    outer_list = list
-    k=0
-    while k < len(outer_list):
-        if list[k].upper() == "CONDITION":
-            condition = {"name": list[k+1], "operator": list[k+2], "value": int(list[k+3])}
-            k+= 4
+    k = 0
+    while k < len(cond_list):
+        if cond_list[k].upper() == "CONDITION":
+            condition = {"name": cond_list[k+1], "operator": cond_list[k+2], "value": int(cond_list[k+3])}
+            k += 4
             conditions.append(condition)
     return conditions
 
-def make_actions(list):
+
+def make_actions(act_list):
     actions = []
-    m=0
-    while m < len(list):
-        if list[m].upper() == 'ACTION':
-            action = {'name':list[m+1], 'params': {list[m+2]:float(list[m+3])}}
-            m+=4
+    m = 0
+    while m < len(act_list):
+        if act_list[m].upper() == 'ACTION':
+            action = {'name': act_list[m+1], 'params': {act_list[m+2]: float(act_list[m+3])}}
+            m += 4
             actions.append(action)
     return actions
 
+
 def make_rules():
     rules = []
-    list = read_csv()
-    i=0
-    next_rule = 0
-    while len(list) != 0:
-        if list[i].upper() == 'RULE':
-            list.pop(i)
-            if 'rule' not in list:
-                action = list.index('action')
-                conditions = list[0:action]
-                actions = list[action:]
-                list = []
+    rule_list = read_csv()
+    i = 0
+    # next_rule = 0
+    while len(rule_list) != 0:
+        if rule_list[i].upper() == 'RULE':
+            rule_list.pop(i)
+            if 'rule' not in rule_list:
+                action = rule_list.index('action')
+                conditions = rule_list[0:action]
+                actions = rule_list[action:]
+                rule_list = []
             else:
-                next_rule = list.index('rule')
-                action = list.index('action')
-                conditions = list[0:action]
-                actions = list[action:next_rule]
-                list = list[next_rule:]
-            rules.append({'conditions':{'all':make_conditions(conditions)}, 'actions':make_actions(actions)})
+                next_rule = rule_list.index('rule')
+                action = rule_list.index('action')
+                conditions = rule_list[0:action]
+                actions = rule_list[action:next_rule]
+                rule_list = rule_list[next_rule:]
+            rules.append({'conditions': {'all': make_conditions(conditions)}, 'actions': make_actions(actions)})
     print rules
     return rules
-
