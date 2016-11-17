@@ -1,8 +1,8 @@
 rule,,,,,
 ,condition,days_last_sold,greater_than,4,#
 ,,,,,
-,action,increase_price,PARAMETER,sales_percentage,0.2
+,action,price_change,PARAMETER,sales_percentage,0.2
 rule,,,,,
-,condition,days_last_sold,#,less_than,5,
+,condition,days_last_sold,#r,less_than,5,
 ,,,,,
-,action,increase_price,PARAMETER, sales_percentage, 0.5
+,action,price_change,PARAMETER, sales_percentage, 0.5
