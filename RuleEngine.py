@@ -8,7 +8,7 @@ rules = make_rules()
 print rules
 output_file = open('C:/Users/George/Dropbox/price_output.csv', 'wb')
 price_output = csv.writer(output_file)
-price_output.writerow(['stock_item_id', 'bc_id', 'sku', 'old_price', 'new_price', 'change'])
+price_output.writerow(['stock_item_id', 'bc_id', 'sku', 'old_price', 'new_price', 'change', '% change'])
 output_file.close()
 
 with open('C:/Users/George/Dropbox/rule_engine_data.csv') as csv_file:
