@@ -13,7 +13,7 @@ class Product:
         self.title = title
         self.category = category
         self.sold_1_10 = sold_1_10
-        #self.days_last_sold = days_last_sold
+        self.days_last_sold = days_last_sold
         self.last_sold_price = last_sold_price
         self.weight = weight
         self.available = available
@@ -23,7 +23,7 @@ class Product:
         self.last_price_update = last_price_update
         self.days_ago_created = days_ago_created
         self.current_inventory = 24
-        self.days_last_sold = 5
+        #self.days_last_sold = 5
         self.price = 10.00
         self.bc_id = bc_id
 
@@ -111,8 +111,8 @@ class ProductActions(BaseActions):
             self.product.change = 'UP'
         else:
             self.product.change = 'DOWN'
-        print 'Price went up from ' + str(self.product.retail_price) + ' to ' + str(self.product.new_price)
+        print 'Price went ' + self.product.change + ' from ' + str(self.product.retail_price) + ' to ' + str(self.product.new_price)
         output_file = open("C:/Users/George/Dropbox/price_output.csv", "ab")
         price_output = csv.writer(output_file)
         price_output.writerow([self.product.stock_item_id, self.product.bc_id, self.product.sku,
-                               self.product.retail_price, self.product.new_price, self.product.change])
+                               self.product.retail_price, self.product.new_price, self.product.change, sales_percentage])
