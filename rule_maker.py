@@ -34,7 +34,7 @@ def make_conditions(cond_list):
     k = 0
     while k < len(cond_list):
         if cond_list[k].upper() == "CONDITION":
-            condition = {"name": cond_list[k+1], "operator": cond_list[k+2], "value": int(cond_list[k+3])}
+            condition = {"name": cond_list[k+1], "operator": cond_list[k+2], "value": float(cond_list[k+3])}
             k += 4
             conditions.append(condition)
     return conditions
@@ -75,3 +75,5 @@ def make_rules():
             rules.append({'conditions': {'all': make_conditions(conditions)}, 'actions': make_actions(actions)})
     print rules
     return rules
+
+make_rules()
